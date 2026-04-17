@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Gold Loan Pro</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <style>
+    body {
+      font-family: Arial;
+      background: #111;
+      color: white;
+      text-align: center;
+      padding: 20px;
+    }
+    .box {
+      background: #1e1e1e;
+      padding: 20px;
+      border-radius: 15px;
+    }
+    input {
+      width: 90%;
+      padding: 12px;
+      margin: 10px;
+      font-size: 16px;
+      border-radius: 8px;
+      border: none;
+    }
+    button {
+      padding: 12px 20px;
+      margin: 5px;
+      border: none;
+      border-radius: 8px;
+      font-size: 16px;
+    }
+    .calc { background: gold; }
+    .clear { background: red; color: white; }
+  </style>
+</head>
+
+<body>
+
+<div class="box">
+  <h2>💰 Gold Loan Pro</h2>
+
+  <input type="number" id="amount" placeholder="Loan Amount (LKR)">
+  <input type="number" id="rate" placeholder="Interest Rate (%)">
+  <input type="number" id="months" placeholder="Months">
+
+  <br>
+
+  <button class="calc" onclick="calc()">Calculate</button>
+  <button class="clear" onclick="clr()">Clear</button>
+
+  <h3 id="out"></h3>
+</div>
+
+<script>
+function calc() {
+  let P = parseFloat(document.getElementById("amount").value);
+  let R = parseFloat(document.getElementById("rate").value);
+  let T = parseFloat(document.getElementById("months").value);
+
+  if(!P || !R || !T){
+    document.getElementById("out").innerHTML = "Enter all values!";
+    return;
+  }
+
+  let monthly = (P * R) / 100 / 12;
+  let totalInterest = monthly * T;
+  let total = P + totalInterest;
+
+  document.getElementById("out").innerHTML =
+    "📅 Monthly Interest: " + monthly.toFixed(2) + " LKR<br>" +
+    "💵 Total Interest: " + totalInterest.toFixed(2) + " LKR<br>" +
+    "✅ Total Pay: " + total.toFixed(2) + " LKR<br>" +
+    "🔁 Minimum Pay (Monthly): " + monthly.toFixed(2) + " LKR";
+}
+
+function clr() {
+  document.getElementById("amount").value = "";
+  document.getElementById("rate").value = "";
+  document.getElementById("months").value = "";
+  document.getElementById("out").innerHTML = "";
+}
+</script>
+
+</body>
+</html>
